@@ -3,9 +3,11 @@
 {% block title %}{{ post.title }}{% endblock title %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
-<h3>{{ post.subtitle }}</h3>
-<small>Created by: {{ post.author }}</small>
-<small>Created on: {{ post.created_on }}</small>
-<p>{{ post.body }}</p>
+<div class="container border">
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.subtitle }}</h3>
+    <small>Created by: {{ post.author }}</small>
+    <small>Created on: {{ post.created_on }}</small>
+    <p>{{ post.body }}</p>
+</div>
 {% endblock content %}

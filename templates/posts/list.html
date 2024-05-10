@@ -6,8 +6,8 @@
 <h1>Posts</h1>
 <ul>
     {% for post in post_list %}
-    <li>
-        <a href="{% url 'detail' post.id %}">{{ post.title }}</a>
+    <li class="list-group border">
+        <a class="list-group-item" href="{% url 'detail' post.id %}">{{ post.title }}</a>
     </li>
     {% endfor %}
 </ul>

@@ -16,6 +16,12 @@ class PostListView(ListView):
     model = Post
     # context_object_name = "posts"
     # make it so that this view only shows published posts (to everyone)?
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        published_status = Status.objects.get(name="published")
+        context["post_list"] = Post.objects.filter(
+            status=published_status).order_by("created_on").reverse()
+        return context
 
 class DraftPostListView(LoginRequiredMixin, ListView):
     template_name = "posts/list.html"
@@ -28,6 +34,19 @@ class DraftPostListView(LoginRequiredMixin, ListView):
             status=draft_status).filter(
                 author=self.request.user).order_by("created_on").reverse()
         return context
+
+
+class ArchivedPostListView(LoginRequiredMixin, ListView):
+    template_name = "posts/list.html"
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        archive_status = Status.objects.get(name="archived")
+        context["post_list"] = Post.objects.filter(
+            status=archive_status).order_by("created_on").reverse()
+        return context
+
 
 
 class PostDetailView(DetailView):
